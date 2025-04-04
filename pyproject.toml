@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.12",
     "httpx>=0.28.1",
+    "pydantic>=2.11.1",
     "pydantic-settings>=2.8.1",
     "pytest>=8.3.5",
     "uvicorn[standard]>=0.34.0",
@@ -17,5 +18,6 @@ members = ["tmp"]
 
 [tool.pytest.ini_options]
 pythonpath = [
-  "."
+  ".",
+  "./app"
 ]
