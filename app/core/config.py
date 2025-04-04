@@ -15,8 +15,9 @@ class Settings(BaseSettings):
         """This validates the provided algorithm is supported.
         """
         if v in hashlib.algorithms_guaranteed:
+            logging.warning(f"Using the provided digest {v}.")
             return v
-        logging.warning(f"Failed to validate provided digest {v}. Falling back to sha256")
+        logging.warning(f"Failed to validate provided digest {v}. Falling back to sha256.")
         return "sha256"
 
     @field_validator('hmac_key', mode='before')

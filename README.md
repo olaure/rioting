@@ -1,5 +1,26 @@
 # Riot Take-Home Technical Challenge
 
+## Implementation notes
+
+### Usage
+
+A makefile allows for a quick and easy build, test and run.
+Docker is mandatory to run it (and not install anything else on your machine).
+The resulting image is about 120MB
+
+### Implementation details
+
+Contrarily to the given examples for the encrypt method, I have chosen to cast as json all values below the first level of nesting.
+This allows to easily differentiate the values `123` and `"123"` which are two different json entries and should be decoded as such.
+(The tests contain those entries).
+
+This means that the payload `"John Doe"` has an encrypted value of `IkpvaG4gRG9lIg==` instead of `Sm9obiBEb2U=` because of the quotes.
+
+Also, I have considered that a json payload consisting of an array at the root level is to be considered as a set of depth 1 properties.
+
+Finally, the signing method has a default hmac algorithm of sha256 but it is configurable within the settings (in `/app/core/config.py`) and through env variables (by passing an env variable to the docker run command like `-e HMAC_DIGEST=md5`).
+The signing key is generated in the config at the start of the container and could be loaded as a base64 encoded.
+
 ## Overview
 
 This challenge requires you to build an HTTP API with 4 endpoints that handle JSON payloads for encryption, decryption, signing, and verification operations.
