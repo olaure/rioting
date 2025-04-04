@@ -1,4 +1,3 @@
-import logging
 from typing import (
     Annotated,
     Any,
@@ -19,5 +18,4 @@ async def encrypt(body: Annotated[Any, Depends(check_json_body)]):
 
 @router.post("/decrypt")
 async def decrypt(body: Annotated[Any, Depends(check_json_body)]):
-    logging.warning(f"Decrypting message {body}")
     return CypherService.decrypt_message(body)

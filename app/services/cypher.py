@@ -16,14 +16,16 @@ class CypherService:
 
     @classmethod
     def encrypt(cls, data: Any) -> str:
-        logging.warning(f"Received data to encrypt '{data}'")
+        """This method casts data to bytes that are then encoded
+        """
         raw = cast(data, sort=False)
-        logging.warning(f"Encoding data '{raw}'")
         return cls.Encoder(raw)
 
     @classmethod
     def decrypt(cls, data: str) -> Any:
-        logging.warning(f"Decrypting data {data}")
+        """This method expects the data to have been encrypted by the above method.
+        The decryption is to decode and uncast the data from bytes.
+        """
         try:
             decoded = cls.Decoder(data)
             return uncast(decoded)
